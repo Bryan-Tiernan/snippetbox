@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"os"
 
+	"snippetbox.bryan-tiernan.com/internal/models"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -14,6 +16,7 @@ import (
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
+	snippets *models.SnippetModel
 }
 
 func main() {
@@ -35,6 +38,7 @@ func main() {
 	app := &application{
 		errorLog: errorLog,
 		infoLog:  infoLog,
+		snippets: &models.SnippetModel{DB: db},
 	}
 
 	srv := &http.Server{
